@@ -27,8 +27,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:server": "tsc -p ./tsconfig.server.json && node ./src/server/dist/index.js",
-    "start:ts": "ts-node src/server/index.ts"
+    "dev:server": "rm -rf src/server/dist/; tsc -p ./tsconfig.server.json && node ./src/server/dist/server/index.js",
+    "dev:ts": "ts-node src/server/index.ts"
   },
   "browserslist": {
     "production": [

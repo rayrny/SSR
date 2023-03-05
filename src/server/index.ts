@@ -1,5 +1,6 @@
 import express from "express";
-import path from "path";
+// import path from "path";
+import render from './render';
 
 const app = express();
 
@@ -8,6 +9,4 @@ app.listen(8000, () => {
 });
 // app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../build/index.html"));
-});
+app.get("/", render);

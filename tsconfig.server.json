@@ -18,6 +18,6 @@
     "outDir": "./src/server/dist",
     "sourceMap": true
   },
-  "include": ["src/server/*"],
+  "include": ["src/server/index.ts"],
   "exclude": ["node_modules"]
 }
