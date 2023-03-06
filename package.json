@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev:server": "rm -rf src/server/dist/; tsc -p ./tsconfig.server.json && node ./src/server/dist/server/index.js",
-    "dev:ts": "ts-node src/server/index.ts"
+    "dev:ts": "ts-node server/index.ts"
   },
   "browserslist": {
     "production": [

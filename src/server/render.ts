@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import renderApp from "../App.server";
+import renderApp from "../client/App.server";
 
 const sendStringifiedHtml = (req: Request, res: Response) => {
   const html = renderApp();
