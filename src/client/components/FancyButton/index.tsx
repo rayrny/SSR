@@ -1,16 +1,15 @@
 import styled from "styled-components";
 
-const FancyWrapper = styled.div`
-  background-color: sky-blue;
-  radius: 0.5rem;
+const FancyWrapper = styled.button`
+  background-color: #5b2ee0;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  border: 0;
+  padding: 0.5rem 0.75rem;
 `;
 
 function FancyButton({ children }: { children: JSX.Element | string }) {
-  return (
-    <button>
-      <FancyWrapper /> {children}
-    </button>
-  );
+  return <FancyWrapper>{children}</FancyWrapper>;
 }
 
 export default FancyButton;
