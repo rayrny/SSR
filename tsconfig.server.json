@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,6 +18,6 @@
     "outDir": "./src/server/dist",
     "sourceMap": true
   },
-  "include": ["src/server/index.ts"],
+  "include": ["src/server"],
   "exclude": ["node_modules"]
 }

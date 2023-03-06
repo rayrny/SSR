@@ -10,3 +10,5 @@ app.listen(8000, () => {
 // app.use(express.static("public"));
 
 app.get("/", render);
+
+// 404, 500

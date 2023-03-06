@@ -1,5 +1,7 @@
 // import "./App.css";
 
+import FancyButton from "./components/FancyButton";
+
 function App() {
   return (
     <div id="app" className="App">
@@ -15,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        <FancyButton>button hello</FancyButton>
       </header>
     </div>
   );

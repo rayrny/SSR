@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,7 +15,9 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "module": "CommonJS",
-    "sourceMap": true
+    "sourceMap": true,
+    "rootDir": "./src"
+    // "outDir": "./dist",
   },
   "include": ["src"],
   "exclude": ["node_modules"]
