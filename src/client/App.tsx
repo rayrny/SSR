@@ -21,7 +21,12 @@ function App() {
             Learn React
           </a>
           <br />
-          <FancyButton>button hello</FancyButton>
+          <FancyButton color="primary">primary</FancyButton>
+          <FancyButton color="secondary">secondary</FancyButton>
+          <FancyButton color="success">success</FancyButton>
+          <FancyButton color="danger">danger</FancyButton>
+          <FancyButton color="warning">warning</FancyButton>
+          <FancyButton color="info">info</FancyButton>
         </header>
       </div>
     </>
