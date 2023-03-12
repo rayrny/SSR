@@ -8,6 +8,7 @@ const FancyWrapper = styled.button`
   border-radius: 0.5rem;
   border: 0;
   padding: 0.5rem 0.75rem;
+  cursor: pointer;
 `;
 
 function FancyButton({
@@ -17,7 +18,15 @@ function FancyButton({
   children: JSX.Element | string;
   color?: string;
 }) {
-  return <FancyWrapper color={color}>{children}</FancyWrapper>;
+  const handleClick = () => {
+    console.log("click event occured!");
+    alert(`hello, ${color} button!`);
+  };
+  return (
+    <FancyWrapper color={color} onClick={handleClick}>
+      {children}
+    </FancyWrapper>
+  );
 }
 
 export default FancyButton;

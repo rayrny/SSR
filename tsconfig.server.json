@@ -20,5 +20,5 @@
     "outDir": "./src/server/dist"
   },
   "include": ["src/server"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist", "src/client/*"]
 }

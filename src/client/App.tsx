@@ -20,13 +20,16 @@ function App() {
           >
             Learn React
           </a>
+          <h2>할 수 있 다!</h2>
           <br />
-          <FancyButton color="primary">primary</FancyButton>
-          <FancyButton color="secondary">secondary</FancyButton>
-          <FancyButton color="success">success</FancyButton>
-          <FancyButton color="danger">danger</FancyButton>
-          <FancyButton color="warning">warning</FancyButton>
-          <FancyButton color="info">info</FancyButton>
+          <div>
+            <FancyButton color="primary">primary</FancyButton>
+            <FancyButton color="secondary">secondary</FancyButton>
+            <FancyButton color="success">success</FancyButton>
+            <FancyButton color="danger">danger</FancyButton>
+            <FancyButton color="warning">warning</FancyButton>
+            <FancyButton color="info">info</FancyButton>
+          </div>
         </header>
       </div>
     </>

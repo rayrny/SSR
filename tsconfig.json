@@ -19,6 +19,6 @@
     "rootDir": "./src"
     // "outDir": "./dist",
   },
-  "include": ["src", "src/client", "src/server"],
-  "exclude": ["node_modules"]
+  "include": ["src", "src/client"],
+  "exclude": ["node_modules", "src/server/*"]
 }
