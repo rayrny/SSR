@@ -3,7 +3,12 @@ const path = require("path");
 
 module.exports = {
   mode: "development",
+  target: "node",
   entry: path.resolve(__dirname, "src/server/index.ts"),
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
+  },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"],
     alias: {
@@ -19,9 +24,5 @@ module.exports = {
         use: ["ts-loader"],
       },
     ],
-  },
-  output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "dist"),
   },
 };
