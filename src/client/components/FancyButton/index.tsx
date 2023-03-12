@@ -15,7 +15,7 @@ function FancyButton({
   color,
 }: {
   children: JSX.Element | string;
-  color: string;
+  color?: string;
 }) {
   return <FancyWrapper color={color}>{children}</FancyWrapper>;
 }
