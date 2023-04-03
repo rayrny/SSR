@@ -1,5 +1,6 @@
-/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
+const nodeExternals = require("webpack-node-externals");
 
 const isProd = false;
 const clientConfig = {
@@ -9,6 +10,7 @@ const clientConfig = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist/client"),
+    publicPath: "/dist/client",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -47,6 +49,7 @@ const clientConfig = {
 const serverConfig = {
   mode: isProd ? "production" : "development",
   target: "node",
+  externals: [nodeExternals()],
   entry: path.resolve(__dirname, "src/server/index.ts"),
   output: {
     filename: "main.js",
