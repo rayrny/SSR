@@ -24,6 +24,11 @@ const clientConfig = {
       {
         test: /\.tsx?$/i,
         exclude: /node_modules/,
+        use: "babel-loader",
+      },
+      {
+        test: /\.tsx?$/i,
+        exclude: /node_modules/,
         use: ["ts-loader"],
       },
     ],
@@ -64,6 +69,11 @@ const serverConfig = {
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/i,
+        exclude: /node_modules/,
+        use: "babel-loader",
+      },
       {
         test: /\.tsx?$/i,
         exclude: /node_modules/,

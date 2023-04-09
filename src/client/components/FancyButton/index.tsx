@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import COLOR from "../../constants/colors";
 
-const FancyWrapper = styled.button`
+interface IFancyButtonProps {
+  children: JSX.Element | string;
+  color?: string;
+}
+
+const FancyWrapper = styled.button<IFancyButtonProps>`
   background-color: ${(props) =>
     props.color ? COLOR[props.color] : COLOR.primary};
   color: #ffffff;
@@ -11,13 +16,7 @@ const FancyWrapper = styled.button`
   cursor: pointer;
 `;
 
-function FancyButton({
-  children,
-  color,
-}: {
-  children: JSX.Element | string;
-  color?: string;
-}) {
+function FancyButton({ children, color }: IFancyButtonProps) {
   const handleClick = () => {
     console.log("click event occured!");
     alert(`hello, ${color} button!`);
