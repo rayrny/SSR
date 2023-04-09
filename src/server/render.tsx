@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { Request, Response } from "express";
 import ReactDOMServer from "react-dom/server";
+import { StaticRouter } from "react-router-dom/server";
 import { ServerStyleSheet } from "styled-components";
 
 import App from "../client/App";
@@ -14,12 +15,14 @@ const template = fs.readFileSync(
   "utf8"
 );
 
-const render = (): { html: string; styleTags: string } => {
+const render = (url: string): { html: string; styleTags: string } => {
   const html: string = ReactDOMServer.renderToString(
     styleSheet.collectStyles(
       <>
         <GlobalStyle />
-        <App />
+        <StaticRouter location={url}>
+          <App />
+        </StaticRouter>
       </>
     )
   );
@@ -30,12 +33,12 @@ const render = (): { html: string; styleTags: string } => {
 };
 
 const sendStringifiedHtml = (req: Request, res: Response) => {
-  const { html, styleTags } = render();
+  console.log(typeof req.url);
+  const { html, styleTags } = render(req.url);
 
   const result = template
     .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
     .replace('<style id="server-style"></style>', styleTags);
-
   res.send(result);
 };
 
