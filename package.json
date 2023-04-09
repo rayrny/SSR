@@ -54,6 +54,7 @@
     "babel-plugin-styled-components": "^2.1.1",
     "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
+    "html-webpack-plugin": "^5.5.0",
     "nodemon": "^2.0.21",
     "npm": "^9.6.3",
     "ts-node": "^10.9.1",

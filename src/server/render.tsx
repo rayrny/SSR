@@ -6,6 +6,7 @@ import ReactDOMServer from "react-dom/server";
 import { ServerStyleSheet } from "styled-components";
 
 import App from "../client/App";
+import { GlobalStyle } from "../client/global-style";
 
 const styleSheet = new ServerStyleSheet();
 const template = fs.readFileSync(
@@ -15,7 +16,12 @@ const template = fs.readFileSync(
 
 const render = (): { html: string; styleTags: string } => {
   const html: string = ReactDOMServer.renderToString(
-    styleSheet.collectStyles(<App />)
+    styleSheet.collectStyles(
+      <>
+        <GlobalStyle />
+        <App />
+      </>
+    )
   );
 
   const styleTags = styleSheet.getStyleTags();
@@ -23,16 +29,14 @@ const render = (): { html: string; styleTags: string } => {
   return { html, styleTags };
 };
 
-const makeupHtmlFile = (body: string, styles: string) => {
-  const result: string = template
-    .replace('<div id="app"></div>', body)
-    .replace('<style id="server-style"></style>', styles);
-  return result;
-};
-
 const sendStringifiedHtml = (req: Request, res: Response) => {
   const { html, styleTags } = render();
-  res.send(makeupHtmlFile(html, styleTags)); // 여기서 완성된 html string 을 보내주도록 해야함
+
+  const result = template
+    .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+    .replace('<style id="server-style"></style>', styleTags);
+
+  res.send(result);
 };
 
 export default sendStringifiedHtml;
