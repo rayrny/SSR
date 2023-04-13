@@ -33,7 +33,6 @@ const render = (url: string): { html: string; styleTags: string } => {
 };
 
 const sendStringifiedHtml = (req: Request, res: Response) => {
-  console.log(typeof req.url);
   const { html, styleTags } = render(req.url);
 
   const result = template
