@@ -6,11 +6,11 @@ const isProd = false;
 const clientConfig = {
   mode: isProd ? "production" : "development",
   target: "web",
-  entry: path.resolve(__dirname, "src/client/App.client.tsx"),
+  entry: path.resolve(__dirname, "src/client/index.tsx"),
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist/client"),
-    publicPath: "/dist/client",
+    path: path.resolve(__dirname, "public/dist/client"),
+    publicPath: "public",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -58,7 +58,8 @@ const serverConfig = {
   entry: path.resolve(__dirname, "src/server/index.ts"),
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, "dist/server"),
+    path: path.resolve(__dirname, "public/dist/server"),
+    publicPath: "public",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],

@@ -10,6 +10,6 @@ app.listen(8000, () => {
 app.use("/public", express.static("public"));
 app.use("/dist", express.static("dist"));
 
-app.get("/", render);
+app.use("/", render);
 
 // 404, 500

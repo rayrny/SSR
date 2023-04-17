@@ -31,10 +31,10 @@
   },
   "scripts": {
     "build:dev": "rm -rf src/server/dist/ && tsc -p ./tsconfig.server.json && node ./src/server/dist/server/index.js",
-    "build:ts": "nodemon --exec ts-node -e ts,tsx ./src/server/index.ts && rm -rf ./dist && npm run webpack",
+    "build:ts": "nodemon --exec ts-node -e ts,tsx ./src/server/index.ts && rm -rf ./public/dist && npm run webpack",
     "dev:cli": "webpack serve",
     "webpack": "webpack",
-    "start": "rm -rf ./dist && webpack && npm run dev",
+    "start": "rm -rf ./public/dist && webpack && npm run dev",
     "dev": "webpack-dev-server"
   },
   "browserslist": {
