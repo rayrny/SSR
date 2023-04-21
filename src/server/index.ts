@@ -1,7 +1,9 @@
 import express from "express";
 // import path from "path";
 import render from './render';
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
 
 app.listen(8000, () => {
