@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
+
+const env = dotenv.config().parsed;
 
 const isProd = false;
 const clientConfig = {
@@ -16,7 +20,7 @@ const clientConfig = {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
     alias: {
       src: path.resolve(__dirname, "./src/"),
-      server: path.resolve(__dirname, "./src/server"),
+      client: path.resolve(__dirname, "./src/client"),
     },
   },
   module: {
@@ -33,19 +37,11 @@ const clientConfig = {
       },
     ],
   },
-  devServer: {
-    port: 8000,
-    allowedHosts: "auto",
-    client: {
-      logging: "info",
-      progress: true,
-    },
-    static: [
-      {
-        directory: path.resolve(__dirname, "./public"),
-      },
-    ],
-  },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.REACT_APP_API_KEY": JSON.stringify(env.REACT_APP_API_KEY),
+    }),
+  ],
   watchOptions: {
     ignored: /node_modules/,
   },
@@ -82,6 +78,11 @@ const serverConfig = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.REACT_APP_API_KEY": JSON.stringify(env.REACT_APP_API_KEY),
+    }),
+  ],
 };
 
 module.exports = [clientConfig, serverConfig];

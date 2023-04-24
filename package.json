@@ -23,7 +23,7 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-query": "^3.39.3",
+    "react-query": "npm:@tanstack/react-query@4.26.1",
     "react-router-dom": "^6.10.0",
     "styled-components": "^5.3.8",
     "ts-loader": "^9.4.2",
@@ -32,10 +32,10 @@
   },
   "scripts": {
     "build:dev": "rm -rf src/server/dist/ && tsc -p ./tsconfig.server.json && node ./src/server/dist/server/index.js",
-    "build:ts": "nodemon --exec ts-node -e ts,tsx ./src/server/index.ts && rm -rf ./public/dist && npm run webpack",
+    "build:ts": "webpack --watch | nodemon --exec ts-node -e ts,tsx ./src/server/index.ts",
     "dev:cli": "webpack serve",
-    "webpack": "webpack",
-    "start": "rm -rf ./public/dist && webpack && npm run dev",
+    "webpack": "rm -rf ./public/dist && webpack",
+    "start": "npm run webpack && npm run dev",
     "dev": "webpack-dev-server"
   },
   "browserslist": {
