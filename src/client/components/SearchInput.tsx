@@ -25,7 +25,10 @@ function SearchInput() {
     <InputWrapper
       placeholder="고양이 보고싶어..."
       value={keyword}
-      onChange={handleChange}
+      onChange={(e) => {
+        console.log("onChange");
+        setKeyword(e.target.value);
+      }}
     />
   );
 }

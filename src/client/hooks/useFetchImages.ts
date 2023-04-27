@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 const IMAGE_KEY = "thecatapi";
@@ -10,18 +10,26 @@ const axiosInstance = axios.create({
   },
 });
 
+export interface ICatImages {
+  id: string;
+  url: string;
+  width: number;
+  height: number;
+  breeds: string[];
+  favourite: object;
+}
+
 const getImages = async () => {
-  const { data } = await axiosInstance.get(
-    "https://api.thecatapi.com/v1/images/search?limit=12"
+  const { data } = await axiosInstance.get<ICatImages[]>(
+    "https://api.thecatapi.com/v1/images/search?&limit=12"
   );
 
-  return data;
+  return data ?? [];
 };
 
+// query hydration
 export const useGetImages = () => {
-  const { isLoading, isFetching, data, isError } = useQuery([IMAGE_KEY], () =>
-    getImages()
-  );
-
-  return { isLoading, isFetching, data, isError };
+  return useQuery([IMAGE_KEY], () => getImages(), {
+    suspense: true,
+  });
 };

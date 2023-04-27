@@ -15,7 +15,7 @@ const getStyleTags = (element: ReactNode) => {
   return styleSheet.getStyleTags();
 };
 
-const sendStringifiedHtml = (req: Request, res: Response) => {
+const render = (req: Request, res: Response) => {
   const RootApp = () => (
     <>
       <GlobalStyle />
@@ -48,4 +48,4 @@ const sendStringifiedHtml = (req: Request, res: Response) => {
   );
 };
 
-export default sendStringifiedHtml;
+export default render;
