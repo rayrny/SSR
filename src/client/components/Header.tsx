@@ -9,7 +9,7 @@ function Header() {
   return (
     <header>
       <HeaderWrapper>
-        <h2>나는 고양이 있어! 메롱12355</h2>
+        <h2>나는 고양이 있어!</h2>
       </HeaderWrapper>
     </header>
   );

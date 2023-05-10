@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useGetImages } from "../hooks/useFetchImages";
-import { assert } from "../utils/assert";
+import { useGetImages } from "../../hooks/useFetchImages";
+import { assert } from "../../utils/assert";
+import PhotoCard from "../PhotoCard";
 
 function Gallery() {
   const { data: images } = useGetImages();
@@ -13,11 +14,7 @@ function Gallery() {
       <h3>내 고양이 짱 귀엽지!</h3>
 
       {images.map((image) => {
-        return (
-          <div key={image.id}>
-            <img src={image.url} />
-          </div>
-        );
+        return <PhotoCard id={image.id} src={image.url} />;
       })}
     </>
   );
