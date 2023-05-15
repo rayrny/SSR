@@ -3,14 +3,14 @@ import Gallery from "../components/Gallery/Gallery";
 import GalleryErrorFallback from "../components/Gallery/Gallery.error";
 import GalleryLoadingFallback from "../components/Gallery/Gallery.loading";
 import Header from "../components/Header";
-import SearchInput from "../components/SearchInput";
+import Navigation from "../components/Navigation";
 import SSRSuspense from "../components/SSRSuspense";
 
 function Home() {
   return (
     <>
       <Header />
-      <SearchInput />
+      <Navigation />
 
       <ErrorBoundary fallback={<GalleryErrorFallback />}>
         <SSRSuspense fallback={<GalleryLoadingFallback />}>
