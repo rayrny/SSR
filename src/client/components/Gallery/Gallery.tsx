@@ -33,8 +33,8 @@ function Gallery() {
   const [images, setImages] = useState(
     _flatten(data.pages.map((page) => page.data))
   );
-  // const { data: preloadedImages } = usePreloadImages(images, page);
-  // assert(preloadedImages != null, "preloadedImages가 null일 수 없습니다.");
+  const { data: preloadedImages } = usePreloadImages(images, page);
+  assert(preloadedImages != null, "preloadedImages가 null일 수 없습니다.");
 
   useEffect(() => {
     const callback = (entries) => {
@@ -68,15 +68,16 @@ function Gallery() {
         rowSize={GRID_AUTO_ROWS}
         columnGap={GRID_COLUMN_GAP}
         rowGap={GRID_ROW_GAP}
+        shouldUpdate={() => {}}
       >
-        {images.map((image) => (
+        {preloadedImages.map((image) => (
           <Fragment key={image.id}>
-            <PhotoCard src={image.url} id={image.id} width={IMAGE_WIDTH} />
+            <PhotoCard src={image.src} id={image.id} width={IMAGE_WIDTH} />
           </Fragment>
         ))}
       </MasonryLayout>
 
-      {isFetchingNextPage && <h3>다음 사진 로딩중...</h3>}
+      {isFetchingNextPage && <h3>사진을 더 가져오는 중이야...</h3>}
       <BottomTarget ref={targetRef} isVisible={!isIntersect} />
     </>
   );

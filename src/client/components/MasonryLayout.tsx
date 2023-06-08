@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 export type TMasonryLayout = {
@@ -7,6 +7,11 @@ export type TMasonryLayout = {
   rowSize: number;
   columnGap: number;
   rowGap: number;
+  /**
+   * children이 변경될 때 레이아웃을 다시 계산하기 위한 props
+   * useCallback을 의도적으로 감싸지 않은 빈 함수를 넘겨줌으로써 리렌더링 유발
+   */
+  shouldUpdate: () => void;
 };
 
 const setMasonryLayout = (
@@ -34,12 +39,13 @@ function MasonryLayout({
   rowSize,
   columnGap,
   rowGap,
+  shouldUpdate,
 }: TMasonryLayout) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMasonryLayout(containerRef, rowSize, rowGap);
-  }, []);
+  }, [shouldUpdate]);
 
   return (
     <Container
