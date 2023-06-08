@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { ICatImages } from "./useFetchImages";
+import { ICatImage } from "./useFetchImages";
 
 const LOAD_IMAGE_KEY = "loadImages";
 
-const preloadImage = async (image: ICatImages): Promise<HTMLImageElement> => {
+const preloadImage = async (image: ICatImage): Promise<HTMLImageElement> => {
   return new Promise((resolve, reject) => {
     try {
       const img = document.createElement("img");
@@ -16,7 +16,7 @@ const preloadImage = async (image: ICatImages): Promise<HTMLImageElement> => {
   });
 };
 
-export const usePreloadImages = (images: ICatImages[], page: number) => {
+export const usePreloadImages = (images: ICatImage[], page: number) => {
   return useQuery(
     [LOAD_IMAGE_KEY, page],
     () =>
