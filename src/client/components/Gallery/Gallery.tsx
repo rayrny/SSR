@@ -1,65 +1,35 @@
 import { Fragment, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
-import { useGetImages } from "../../hooks/useFetchImages";
-import { usePreloadImages } from "../../hooks/useLoadImages";
+import { useGetImages } from "../../hooks.query/useFetchImages";
+import { usePreloadImages } from "../../hooks.query/useLoadImages";
 import _flatten from "lodash/flatten";
 import { assert } from "../../utils/assert";
 import PhotoCard from "../PhotoCard";
 import MasonryLayout from "../MasonryLayout";
+import { ImpressionArea } from "./ImpressionArea";
 
 const IMAGE_WIDTH = "324px";
 const GRID_AUTO_ROWS = 10;
 const GRID_ROW_GAP = 10;
 const GRID_COLUMN_GAP = 8;
 
-const initObserver = (callback) => {
-  return new IntersectionObserver(callback, {
-    root: null,
-    rootMargin: `16px 0px`,
-  });
-};
-
-let observer;
 function Gallery() {
-  const [page, setPage] = useState(0);
-  const [isIntersect, setIsIntersect] = useState(false);
-  const targetRef = useRef(null);
-
-  const { data, fetchNextPage, isFetchingNextPage } = useGetImages({
-    pageParam: page,
+  const {
+    data: images,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useGetImages({
+    pageParam: 0,
   });
-  assert(data != null, "images가 null일 수 없습니다."); // suspense 사용 시 데이터가 존재하는 것이 보장되므로 타입 단언
-  const [images, setImages] = useState(
-    _flatten(data.pages.map((page) => page.data))
+
+  assert(images != null, "images가 null일 수 없습니다."); // suspense 사용 시 데이터가 존재하는 것이 보장되므로 타입 단언
+  const currentPage = images.pages.length - 1;
+
+  const { data: preloadedImages } = usePreloadImages(
+    _flatten(images.pages.map((page) => page.data)),
+    currentPage
   );
-  const { data: preloadedImages } = usePreloadImages(images, page);
-  assert(preloadedImages != null, "preloadedImages가 null일 수 없습니다.");
-
-  useEffect(() => {
-    const callback = (entries) => {
-      entries.forEach((target) => {
-        if (target.isIntersecting) {
-          setIsIntersect(true);
-        }
-      });
-    };
-
-    observer = initObserver(callback);
-    observer.observe(targetRef.current);
-  }, [isFetchingNextPage]);
-
-  useEffect(() => {
-    if (isIntersect && !isFetchingNextPage) {
-      setPage((prev) => (prev += 1));
-      fetchNextPage();
-      setIsIntersect(false);
-    }
-  }, [isIntersect, isFetchingNextPage]);
-
-  useEffect(() => {
-    setImages(_flatten(data.pages.map((page) => page.data)));
-  }, [data]);
 
   return (
     <>
@@ -68,23 +38,30 @@ function Gallery() {
         rowSize={GRID_AUTO_ROWS}
         columnGap={GRID_COLUMN_GAP}
         rowGap={GRID_ROW_GAP}
-        shouldUpdate={() => {}}
       >
-        {preloadedImages.map((image) => (
-          <Fragment key={image.id}>
-            <PhotoCard src={image.src} id={image.id} width={IMAGE_WIDTH} />
-          </Fragment>
+        {preloadedImages?.map((image) => (
+          <PhotoCard
+            src={image.src}
+            id={image.id}
+            width={IMAGE_WIDTH}
+            key={image.id}
+          />
         ))}
       </MasonryLayout>
 
       {isFetchingNextPage && <h3>사진을 더 가져오는 중이야...</h3>}
-      <BottomTarget ref={targetRef} isVisible={!isIntersect} />
+
+      {preloadedImages != null && (
+        <ImpressionArea
+          onImpressionStart={() => {
+            if (!isFetchingNextPage) {
+              fetchNextPage({ pageParam: currentPage + 1 });
+            }
+          }}
+        />
+      )}
     </>
   );
 }
 
-const BottomTarget = styled.div<{ isVisible: boolean }>`
-  height: 100px;
-  visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
-`;
 export default Gallery;
