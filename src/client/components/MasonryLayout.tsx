@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Children, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 export type TMasonryLayout = {
@@ -7,30 +7,6 @@ export type TMasonryLayout = {
   rowSize: number;
   columnGap: number;
   rowGap: number;
-  /**
-   * children이 변경될 때 레이아웃을 다시 계산하기 위한 props
-   * useCallback을 의도적으로 감싸지 않은 빈 함수를 넘겨줌으로써 리렌더링 유발
-   */
-  shouldUpdate: () => void;
-};
-
-const setMasonryLayout = (
-  containerRef: React.RefObject<HTMLDivElement>,
-  rowSize: number,
-  rowGap: number
-) => {
-  if (containerRef.current == null) return;
-
-  const items = containerRef.current.children;
-
-  for (let item of items) {
-    const height = item.scrollHeight;
-    const gridRowEndStyle = `grid-row-end: span ${Math.floor(
-      (height + rowGap) / (rowSize + rowGap)
-    )}`;
-
-    item.setAttribute("style", gridRowEndStyle);
-  }
 };
 
 function MasonryLayout({
@@ -39,13 +15,8 @@ function MasonryLayout({
   rowSize,
   columnGap,
   rowGap,
-  shouldUpdate,
 }: TMasonryLayout) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setMasonryLayout(containerRef, rowSize, rowGap);
-  }, [shouldUpdate]);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <Container
@@ -53,10 +24,42 @@ function MasonryLayout({
       columnSize={columnSize}
       columnGap={columnGap}
       rowGap={rowGap}
+      style={{ minHeight: containerRef.current?.clientHeight }}
     >
-      {children}
+      {Children.map(children, (child, index) => (
+        <Item
+          rowGap={rowGap}
+          rowSize={rowSize}
+          key={`${Children.count(children)}-${index}`}
+        >
+          {child}
+        </Item>
+      ))}
     </Container>
   );
+}
+
+function Item({
+  children,
+  rowGap,
+  rowSize,
+}: Omit<TMasonryLayout, "columnGap" | "columnSize">) {
+  const itemRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (itemRef.current == null) {
+      return;
+    }
+
+    const height = itemRef.current.scrollHeight;
+    const gridRowEndStyle = `grid-row-end: span ${Math.floor(
+      (height + rowGap) / (rowSize + rowGap)
+    )}`;
+
+    itemRef.current.setAttribute("style", gridRowEndStyle);
+  }, [children]);
+
+  return <div ref={itemRef}>{children}</div>;
 }
 
 const Container = styled.div<Partial<TMasonryLayout>>`
