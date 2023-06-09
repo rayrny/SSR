@@ -26,7 +26,7 @@ export const usePreloadImages = (images: ICatImage[], page: number) => {
         )
       ),
     {
-      suspense: true,
+      keepPreviousData: true,
     }
   );
 };
