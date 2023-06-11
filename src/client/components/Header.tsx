@@ -9,9 +9,9 @@ function Header() {
         <h1>나는 고양이 있어!</h1>
       </Title>
 
-      <SubTitle>
+      {/* <SubTitle>
         <h2>사진 누르면 짱 귀여운 액자에 넣어서 공유할 수 있지롱!</h2>
-      </SubTitle>
+      </SubTitle> */}
 
       <UploadArea />
     </FloatingBar>
