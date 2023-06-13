@@ -42,7 +42,8 @@
     "dev:cli": "webpack serve",
     "webpack": "rm -rf ./public/dist && webpack",
     "start": "npm run webpack && npm run dev",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "deploy": "node public/dist/server/main.js"
   },
   "browserslist": {
     "production": [
