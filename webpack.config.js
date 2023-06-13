@@ -2,11 +2,11 @@
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const webpack = require("webpack");
-const dotenv = require("dotenv");
 
-const env = dotenv.config().parsed;
+const { ENV, REACT_APP_API_KEY } = process.env;
 
-const isProd = false;
+const isProd = ENV !== "local";
+
 const clientConfig = {
   mode: isProd ? "production" : "development",
   target: "web",
@@ -39,7 +39,7 @@ const clientConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.REACT_APP_API_KEY": JSON.stringify(env.REACT_APP_API_KEY),
+      "process.env.REACT_APP_API_KEY": JSON.stringify(REACT_APP_API_KEY),
     }),
   ],
   watchOptions: {
@@ -80,7 +80,7 @@ const serverConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.REACT_APP_API_KEY": JSON.stringify(env.REACT_APP_API_KEY),
+      "process.env.REACT_APP_API_KEY": JSON.stringify(REACT_APP_API_KEY),
     }),
   ],
 };
