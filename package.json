@@ -61,7 +61,6 @@
     "@babel/preset-env": "^7.21.4",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
-    "babel-loader": "^9.1.2",
     "babel-plugin-styled-components": "^2.1.1",
     "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
