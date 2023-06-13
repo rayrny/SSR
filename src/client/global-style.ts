@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import COLORS from "./constants/colors";
+import BREAKPOINTS from "./constants/breakpoints";
 
 export const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -18,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
 body {
-    margin: 1rem 3rem;
+    margin: 0 2rem 3rem 2rem;
     text-align: center;
     background-color: ${COLORS.dark};
     color: ${COLORS.light};
@@ -27,6 +28,10 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
+      margin: 0 0.5rem;
+    }
   }
   
   code {

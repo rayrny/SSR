@@ -1,23 +1,28 @@
-import Gallery from "../components/Gallery";
-import Header from "../components/Header";
-import SearchInput from "../components/SearchInput";
-import SSRSuspense from "../components/SSRSuspense";
+import styled from "styled-components";
 
-const Fallback = () => {
-  return <h2>사진을 가져오는 중이야 ... </h2>;
-};
+import ErrorBoundary from "../components/ErrorBoundary";
+import Gallery from "../components/Gallery/Gallery";
+import GalleryErrorFallback from "../components/Gallery/Gallery.error";
+import GalleryLoadingFallback from "../components/Gallery/Gallery.loading";
+import Header from "../components/Header";
+import SSRSuspense from "../components/SSRSuspense";
 
 function Home() {
   return (
-    <>
+    <Page>
       <Header />
-      <SearchInput />
 
-      <SSRSuspense fallback={<Fallback />}>
-        <Gallery />
-      </SSRSuspense>
-    </>
+      <ErrorBoundary fallback={<GalleryErrorFallback />}>
+        <SSRSuspense fallback={<GalleryLoadingFallback />}>
+          <Gallery />
+        </SSRSuspense>
+      </ErrorBoundary>
+    </Page>
   );
 }
+
+const Page = styled.div`
+  padding: 2rem 0;
+`;
 
 export default Home;
