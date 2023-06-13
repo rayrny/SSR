@@ -10,7 +10,7 @@ import App from "../client/App";
 import { GlobalStyle } from "../client/global-style";
 
 const template = fs.readFileSync(
-  path.resolve(__dirname, "../../public/index.html"),
+  path.resolve(__dirname, "../../index.html"),
   "utf8"
 );
 const styleSheet = new ServerStyleSheet();
