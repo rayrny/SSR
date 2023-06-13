@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "buildCommand": "npm run webpack",
+  "installCommand": "npm install",
+  "outputDirectory": "public",
   "builds": [
     {
       "src": "public/dist/server/main.js",
