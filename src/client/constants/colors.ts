@@ -1,11 +1,11 @@
 type TColors = Record<string, string>;
 
 const colors: TColors = {
-  primary: "#5b2ee0",
-  secondary: "#5CB8E4",
-  success: "#1acf8b",
-  danger: "#ec3e68",
-  warning: "#fd7f4e",
+  primary: "#B2A4FF",
+  secondary: "#F5B5FC",
+  success: "#96F7D2",
+  danger: "#FCB1B1",
+  warning: "#FDF7C3",
   info: "#cfd2e1",
   white: "#f7f7f7",
   black: "#181818",
