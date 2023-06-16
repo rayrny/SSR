@@ -39,9 +39,9 @@
   "scripts": {
     "dev": "rm -rf src/server/dist/ && tsc -p ./tsconfig.server.json && node ./src/server/dist/server/index.js",
     "dev:ts": "webpack --watch | nodemon --exec ts-node -e ts,tsx ./src/server/index.ts",
-    "build": "rm -rf ./public/dist && NODE_OPTIONS=--max-old-space-size=4092 webpack",
     "start:dev": "npm run webpack && npm run dev",
-    "start": "node public/dist/server/main.js"
+    "build": "rm -rf ./public/dist && NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4092 webpack",
+    "start": "NODE_ENV=production node public/dist/server/main.js"
   },
   "browserslist": {
     "production": [

@@ -3,10 +3,9 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const webpack = require("webpack");
 
-const { ENV, REACT_APP_API_KEY } = process.env;
+const { REACT_APP_API_KEY, NODE_ENV } = process.env;
 
-const isProd = ENV !== "local";
-
+const isProd = NODE_ENV == "production";
 const clientConfig = {
   mode: isProd ? "production" : "development",
   target: "web",

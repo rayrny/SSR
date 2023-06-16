@@ -9,10 +9,11 @@ import { ServerStyleSheet } from "styled-components";
 import App from "../client/App";
 import { GlobalStyle } from "../client/global-style";
 
-const template = fs.readFileSync(
-  path.resolve(__dirname, "../../public/index.html"),
-  "utf8"
-);
+const isProd = process.env.NODE_ENV === "production";
+const templatePath = isProd
+  ? "../../../public/index.html"
+  : "../../public/index.html";
+const template = fs.readFileSync(path.resolve(__dirname, templatePath), "utf8");
 const styleSheet = new ServerStyleSheet();
 
 const render = (req: Request, res: Response) => {
