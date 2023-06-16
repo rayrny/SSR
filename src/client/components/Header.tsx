@@ -10,7 +10,9 @@ function Header() {
     <FloatingBar>
       <Title>
         <CatDefaultIcon width="3rem" stroke={colors.primary} />
-        <H2>나는 고양이 있어!</H2>
+        <div>
+          <H2>나는 고양이 있어!</H2>
+        </div>
         <CatFunnyIcon width="3rem" stroke={colors.main} />
       </Title>
 
@@ -26,8 +28,12 @@ function Header() {
 const FloatingBar = styled.header`
   padding: 0 1.5rem;
   margin-bottom: 1.25rem;
+  position: sticky;
+  top: 0;
+  background: ${colors.background};
 `;
 const Title = styled.div`
+  padding: 1rem 0;
   font-family: UhBeenamsoyoung;
   display: flex;
   align-items: center;

@@ -22,7 +22,7 @@ function Home() {
 }
 
 const Page = styled.div`
-  padding: 2rem 0;
+  padding: 0 0;
 `;
 
 export default Home;
