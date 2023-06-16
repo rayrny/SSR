@@ -51,7 +51,7 @@ function UploadArea() {
         name="file"
         type="file"
         accept="image/*"
-        style={{ visibility: "hidden" }}
+        style={{ visibility: "hidden", width: 0 }}
         onChange={handleImageSelect}
       />
 
@@ -76,7 +76,7 @@ function UploadArea() {
         </>
       ) : (
         <ToggleButton role="button" tabIndex={0} onClick={handleClickInput}>
-          <CameraIcon width="1.9rem" height="1.9rem" stroke={colors.light} />
+          <CameraIcon width="1.9rem" height="1.9rem" stroke={colors.dark} />
           <h5>
             <b>고양이 사진 업로드</b>
           </h5>

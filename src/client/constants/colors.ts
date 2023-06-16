@@ -1,7 +1,9 @@
 type TColors = Record<string, string>;
 
 const colors: TColors = {
-  primary: "#B2A4FF",
+  main: "#5b2EE0",
+
+  primary: "#60b1FF",
   secondary: "#F5B5FC",
   success: "#96F7D2",
   danger: "#FCB1B1",
@@ -10,8 +12,9 @@ const colors: TColors = {
   white: "#f7f7f7",
   black: "#181818",
 
-  dark: "#252525",
+  dark: "#565656",
   light: "#F2F2F2",
+  background: "#dfe2ff",
 };
 
 export default colors;

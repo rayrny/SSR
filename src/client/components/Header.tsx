@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import UploadArea from "./UploadArea";
+import CatFunnyIcon from "../icons/CatFunnyIcon";
+import CatDefaultIcon from "../icons/CatDefaultIcon";
+import colors from "../constants/colors";
 
 function Header() {
   return (
     <FloatingBar>
       <Title>
-        <h1>나는 고양이 있어!</h1>
+        <CatDefaultIcon width="3rem" stroke={colors.primary} />
+        <H2>나는 고양이 있어!</H2>
+        <CatFunnyIcon width="3rem" stroke={colors.main} />
       </Title>
 
       {/* <SubTitle>
@@ -24,11 +29,13 @@ const FloatingBar = styled.header`
 `;
 const Title = styled.div`
   font-family: UhBeenamsoyoung;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-const SubTitle = styled.div`
-  line-height: 1.25;
-  word-break: keep-all;
+const H2 = styled.h2`
+  margin: 0 0.5rem 0.5rem 0.5rem;
 `;
 
 export default Header;

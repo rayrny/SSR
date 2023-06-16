@@ -21,8 +21,8 @@ export const GlobalStyle = createGlobalStyle`
 body {
     margin: 0 2rem 3rem 2rem;
     text-align: center;
-    background-color: ${COLORS.dark};
-    color: ${COLORS.light};
+    background-color: ${COLORS.background};
+    color: ${COLORS.dark};
     font-family: UhBeeYeonie, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
