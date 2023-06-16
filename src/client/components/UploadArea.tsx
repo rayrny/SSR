@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
-import { AddAPhoto, FileUpload, Close } from "@styled-icons/material-outlined";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import { usePostImage } from "../hooks.query/usePostImage";
 import colors from "../constants/colors";
+import CameraIcon from "../icons/CameraIcon";
+import UploadIcon from "../icons/UploadIcon";
 
 function UploadArea() {
   const imageInputRef = useRef<HTMLInputElement | null>(null);
@@ -59,22 +59,27 @@ function UploadArea() {
         <>
           <ImageTag>
             <div style={{ fontSize: 12 }}>{image.name}</div>
-            <Close
+
+            <div
               role="button"
               style={{ width: 16, marginLeft: 4 }}
               onClick={() => setImage(null)}
-            />
+            >
+              <b>X</b>
+            </div>
           </ImageTag>
 
           <ConfirmButton onClick={handleUploadImage}>
-            <FileUpload style={{ width: 16 }} />
+            <UploadIcon width="1.5rem" height="1.5rem" stroke={colors.light} />
             업로드
           </ConfirmButton>
         </>
       ) : (
         <ToggleButton role="button" tabIndex={0} onClick={handleClickInput}>
-          <AddAPhotoIcon />
-          <div>고양이 사진 업로드</div>
+          <CameraIcon width="1.9rem" height="1.9rem" stroke={colors.light} />
+          <h5>
+            <b>고양이 사진 업로드</b>
+          </h5>
         </ToggleButton>
       )}
     </InputArea>
@@ -102,12 +107,6 @@ const ImageTag = styled.div`
   color: ${colors.black};
   border: 1px solid ${colors.info};
   border-radius: 1rem;
-`;
-
-const AddAPhotoIcon = styled(AddAPhoto)`
-  width: 1.25rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.25rem;
 `;
 
 const ConfirmButton = styled.button`
