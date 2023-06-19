@@ -11,7 +11,7 @@ function Header() {
       <Title>
         <CatDefaultIcon width="3rem" stroke={colors.primary} />
         <div>
-          <H2>나는 고양이 있어!</H2>
+          <H2>나는 고양이 있지롱!</H2>
         </div>
         <CatFunnyIcon width="3rem" stroke={colors.main} />
       </Title>
