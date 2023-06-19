@@ -11,7 +11,7 @@ function Header() {
       <Title>
         <CatDefaultIcon width="3rem" stroke={colors.primary} />
         <div>
-          <H2>나는 고양이 있지롱!</H2>
+          <H3>나는 고양이 있지롱!</H3>
         </div>
         <CatFunnyIcon width="3rem" stroke={colors.main} />
       </Title>
@@ -40,7 +40,7 @@ const Title = styled.div`
   justify-content: center;
 `;
 
-const H2 = styled.h2`
+const H3 = styled.h3`
   margin: 0 0.5rem 0.5rem 0.5rem;
 `;
 
