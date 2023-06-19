@@ -44,22 +44,27 @@ function Item({
   rowGap,
   rowSize,
 }: Omit<TMasonryLayout, "columnGap" | "columnSize">) {
-  const itemRef = useRef<HTMLDivElement | null>(null);
+  const itemWrapperRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (itemRef.current == null) {
+    if (itemWrapperRef.current == null) {
       return;
     }
 
-    const height = itemRef.current.scrollHeight;
+    const firstChild = itemWrapperRef.current.querySelector(":first-child");
+    if (firstChild == null) {
+      return;
+    }
+
+    const height = firstChild.scrollHeight;
     const gridRowEndStyle = `grid-row-end: span ${Math.floor(
       (height + rowGap) / (rowSize + rowGap)
     )}`;
 
-    itemRef.current.setAttribute("style", gridRowEndStyle);
+    itemWrapperRef.current.setAttribute("style", gridRowEndStyle);
   }, [children]);
 
-  return <div ref={itemRef}>{children}</div>;
+  return <div ref={itemWrapperRef}>{children}</div>;
 }
 
 const Container = styled.div<Partial<TMasonryLayout>>`
