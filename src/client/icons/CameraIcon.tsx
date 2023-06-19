@@ -7,7 +7,6 @@ const CameraIcon = (props: SVGProps<SVGSVGElement>) => {
       fill="none"
       viewBox="0 0 400 400"
       width="current"
-      height="current"
       {...props}
     >
       <g
