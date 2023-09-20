@@ -12,6 +12,7 @@ function PhotoCard({ src, id, width }: IPhotoCard) {
 
 const Image = styled.img`
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 export default PhotoCard;
