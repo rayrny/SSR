@@ -1,0 +1,71 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [18.11.0]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup Env.
+        working-directory: ./
+        run: |
+          pwd
+          touch .env
+          echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }} >> .env
+          cat .env
+
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          # check cache-hit
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        # working-directory: ./
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn
+        
+      - name: Build
+        # working-directory: ./
+        run: yarn run build
+
+      # - name: Zip /dist files
+      #   run: zip -r hara.zip ./dist ./scripts ./appspec.yml ./.env ./package.json ./prisma
+
+      # - name: 🌎 AWS에 접속
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ap-northeast-2
+
+      # - name: 🦖 S3에 압축된 서버 코드를 업로드
+      #   run: aws s3 cp --region ap-northeast-2 ./hara.zip s3://hara-build/deploy/
+
+      # - name: 🚀 AWS codeDeploy로 배포를 시작
+      #   run: aws deploy create-deployment
+      #     --application-name hara-codedeploy
+      #     --deployment-config-name CodeDeployDefault.OneAtATime
+      #     --deployment-group-name dev
+      #     --s3-location bucket=hara-build,bundleType=zip,key=deploy/hara.zip
