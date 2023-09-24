@@ -54,6 +54,9 @@ jobs:
         # working-directory: ./
         run: yarn run build
 
+      - name: echo
+        run: ls
+
       - name: Zip files
         run: zip -r $GITHUB_SHA.zip .
 
