@@ -55,7 +55,7 @@ jobs:
         run: yarn run build
 
       - name: Zip files
-        run: zip -r $GITHUB_SHA.zip ./build ./scripts ./appspec.yml ./.env ./package.json
+        run: zip -r $GITHUB_SHA.zip .
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
